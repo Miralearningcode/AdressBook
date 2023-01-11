@@ -1,15 +1,21 @@
-﻿namespace ConsoleApp
+﻿using ConsoleApp.Services;
+using System.ComponentModel.Design;
+
+namespace ConsoleApp
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Välkommen till Adressboken");
-            Console.WriteLine("1.Skapa en kontakt");
-            Console.WriteLine("2.Visa alla kontakter");
-            Console.WriteLine("3.Visa en specifik kontakt");
-            Console.WriteLine("4.Ta bort en specifik kontakt");
-            Console.WriteLine("Välj ett av alternativen ovan:");
+            var startmenu = new StartMenuServices();
+            startmenu.Path = @$"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\content.json";
+
+            while(true)
+            {   
+                //console.clear?
+                startmenu.StartMenu();
+            }
+            
         }
     }
 }
