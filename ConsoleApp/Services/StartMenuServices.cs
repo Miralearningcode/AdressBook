@@ -5,8 +5,11 @@ namespace ConsoleApp.Services;
 
 internal class StartMenuServices
 {   
-    private List<Contact> contacts = new List<Contact>();  // A private field that is only accessable within this class
+    private List<Contact> contacts = new List<Contact>();  // A private field that is only accessable within this class   private List<Contact> contacts = new List<Contact>();
     private FileService file = new FileService();
+
+    
+    
 
     public string Path { get; set; } = null!;
     public void StartMenu()
@@ -36,7 +39,7 @@ internal class StartMenuServices
                 break;
         }
     }
-    private void SelectOne()  
+    private void SelectOne()  //Lägga till en kontakt
     {
         var contact = new Contact();
 
@@ -58,16 +61,56 @@ internal class StartMenuServices
        contacts.Add(contact);
        file.SaveContact(Path, JsonConvert.SerializeObject(new { contacts }));
     }
-    private void SelectTwo()
-    {
-        Console.Clear();    
-    }
-    private void SelectThree()
+    private void SelectTwo() //Visa alla kontakter
     {
         Console.Clear();
+        Console.WriteLine("Alla kontakter");
+        foreach (var contact in contacts)
+        {
+            Console.WriteLine($"Förnamn: {contact.FirstName}, Efternamn: {contact.LastName}, Email: {contact.Email}");
+        }
+
+
+        //var contactlist = JsonConvert.DeserializeObject<List<Contact>>(file.ReadContacts(Path));
+        //Console.WriteLine(contactlist);
+
+        //ContactList();
+
+
+
+        //file.ReadContacts(Path);  
+
+        Console.ReadKey();
     }
-    private void SelectFour()
+
+    private void SelectThree() //Visa specifik kontakt
     {
         Console.Clear();
+        Console.WriteLine("Visa en kontakt");
+        Console.Write("Skriv in förnamnet på den kontakt du vill visa:");
+        Console.ReadKey();
+
+        //var contactlist = JsonConvert.DeserializeObject<List<Contact>>(file.ReadContacts());
+    }
+    private void SelectFour() //Radera en specifik kontakt
+    {
+        Console.Clear();
+        Console.WriteLine("Ta bort en kontakt i adressboken");
+        Console.Write("Skriv in förnamnet på den person du vill ta bort:");
+        Console.ReadLine();
+        Console.ReadKey();
     }
 }
+
+
+
+
+
+
+//TEST:
+
+//var contactlist = JsonConvert.DeserializeObject<List<Contact>>(file.ReadContacts(Path));
+       // if (contactlist != null)
+           // contacts = contactlist;
+       // else
+         //   contacts = new ();

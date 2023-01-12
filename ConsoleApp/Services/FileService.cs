@@ -8,13 +8,14 @@ namespace ConsoleApp.Services
 {
     internal class FileService
     {
-        public void SaveContact(string path, string content)
+        public string Path { get; set; } = null!; //Behövs denna?
+        public void SaveContact(string path, string content)  // Save a contact  public void SaveContact(string path, string content) 
         {
-            using var sw = new StreamWriter(path);
+            using var sw = new StreamWriter (path); //
             sw.WriteLine(content);
         }
 
-        public string ReadContact(string path)
+        public string ReadContacts(string path)  //Show all contacts (string path)
         {
             try
             {
@@ -27,7 +28,14 @@ namespace ConsoleApp.Services
             }
         }
 
-        //public void DeleteContact() 
+        
+
+        //public void/string SpecificContact (string path) //Show a specific contact
+        //{ 
+
+        //}
+
+        //public void/string DeleteContact()   //Delete a contact
         //{
 
         //}
