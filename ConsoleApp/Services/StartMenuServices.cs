@@ -5,15 +5,20 @@ namespace ConsoleApp.Services;
 
 internal class StartMenuServices
 {   
-    private List<Contact> contacts = new List<Contact>();  // A private field that is only accessable within this class   private List<Contact> contacts = new List<Contact>();
+    private List<Contact> contacts = new List<Contact>();  // A private field that is only accessable within this class || private List<Contact> contacts = new List<Contact>();
     private FileService file = new FileService();
-
-    
-    
+  
 
     public string Path { get; set; } = null!;
     public void StartMenu()
     {
+        file.Path = @$"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\content.json"; //3,52,.30 in , ifall dessa ska flyttas till Program.cs
+
+        PopulateContactList();
+        
+
+
+
         Console.Clear();
         Console.WriteLine("Välkommen till Adressboken");
         Console.WriteLine("1.Skapa en kontakt");
@@ -39,6 +44,16 @@ internal class StartMenuServices
                 break;
         }
     }
+
+    private void PopulateContactList()  //change name?
+    {
+        var items = JsonConvert.DeserializeObject<List<Contact>>(file.ReadContacts());
+        if (items != null)
+        {
+            contacts = items;
+        }
+      
+    }
     private void SelectOne()  //Lägga till en kontakt
     {
         var contact = new Contact();
@@ -59,24 +74,33 @@ internal class StartMenuServices
         Console.ReadKey();
 
        contacts.Add(contact);
-       file.SaveContact(Path, JsonConvert.SerializeObject(new { contacts }));
+       file.SaveContact(JsonConvert.SerializeObject(contacts)); //file.SaveContact(Path, JsonConvert.SerializeObject(new { contacts }));
     }
     private void SelectTwo() //Visa alla kontakter
     {
         Console.Clear();
         Console.WriteLine("Alla kontakter");
-        foreach (var contact in contacts)
+
+        
+        //var readAllContacts = JsonConvert.DeserializeObject<Contact>; //Is readAllContacts the best name?
+
+
+        //file.ReadContacts(Path, JsonConvert.SerializeObject());
+
+        //Console.WriteLine($"{readAllContacts}");
+
+        //var contactlist = JsonConvert.DeserializeObject<List<Contact>>();
+
+        
+        foreach (var contact in contacts) //Since it is a list foreach loop is needed
         {
             Console.WriteLine($"Förnamn: {contact.FirstName}, Efternamn: {contact.LastName}, Email: {contact.Email}");
         }
 
 
-        //var contactlist = JsonConvert.DeserializeObject<List<Contact>>(file.ReadContacts(Path));
-        //Console.WriteLine(contactlist);
+        
 
         //ContactList();
-
-
 
         //file.ReadContacts(Path);  
 
@@ -89,8 +113,6 @@ internal class StartMenuServices
         Console.WriteLine("Visa en kontakt");
         Console.Write("Skriv in förnamnet på den kontakt du vill visa:");
         Console.ReadKey();
-
-        //var contactlist = JsonConvert.DeserializeObject<List<Contact>>(file.ReadContacts());
     }
     private void SelectFour() //Radera en specifik kontakt
     {
