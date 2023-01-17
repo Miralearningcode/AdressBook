@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfApp.Models;
+using WpfApp.Services;
 
 namespace WpfApp
 {
@@ -24,10 +27,13 @@ namespace WpfApp
     public partial class MainWindow : Window
     {
         private readonly List<IContact> contacts = new();
+        private readonly FileService file = new();
 
         public MainWindow()
         {
             InitializeComponent(); //Måste köras först, inget får ligga ovanför
+            file.Path = @$"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\contentWpf.json";
+            contacts = JsonConvert file.ReadContacts();
         }
 
         private void Btn_AddContact_Click(object sender, RoutedEventArgs e)
