@@ -45,14 +45,17 @@ internal class StartMenuServices
         }
     }
 
-    private void PopulateContactList()  //change name?
+    private void PopulateContactList()  
     {
-        var items = JsonConvert.DeserializeObject<List<Contact>>(file.ReadContacts());
-        if (items != null)
+        try
         {
-            contacts = items;
+            var items = JsonConvert.DeserializeObject<List<Contact>>(file.ReadContacts());
+            if (items != null)
+            {
+                contacts = items;
+            }
         }
-      
+        catch { }
     }
     private void SelectOne()  //Lägga till en kontakt
     {
