@@ -17,8 +17,6 @@ internal class StartMenuServices
         PopulateContactList();
         
 
-
-
         Console.Clear();
         Console.WriteLine("Välkommen till Adressboken");
         Console.WriteLine("1.Skapa en kontakt");
@@ -84,28 +82,10 @@ internal class StartMenuServices
         Console.Clear();
         Console.WriteLine("Alla kontakter");
 
-        
-        //var readAllContacts = JsonConvert.DeserializeObject<Contact>; //Is readAllContacts the best name?
-
-
-        //file.ReadContacts(Path, JsonConvert.SerializeObject());
-
-        //Console.WriteLine($"{readAllContacts}");
-
-        //var contactlist = JsonConvert.DeserializeObject<List<Contact>>();
-
-        
         foreach (var contact in contacts) //Since it is a list foreach loop is needed
         {
             Console.WriteLine($"Förnamn: {contact.FirstName}, Efternamn: {contact.LastName}, Email: {contact.Email}");
         }
-
-
-        
-
-        //ContactList();
-
-        //file.ReadContacts(Path);  
 
         Console.ReadKey();
     }
