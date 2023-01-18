@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Runtime.CompilerServices;
@@ -26,14 +27,28 @@ namespace WpfApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly List<IContact> contacts = new();
+        private ObservableCollection<Contact> contacts = new ObservableCollection<Contact>();
         private readonly FileService file = new();
 
         public MainWindow()
         {
             InitializeComponent(); //Måste köras först, inget får ligga ovanför
             file.Path = @$"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\contentWpf.json";
-            contacts = JsonConvert file.ReadContacts();
+
+            PopulateContactList();
+        }
+
+        private void PopulateContactList()
+        {
+            try
+            {
+                var items = JsonConvert.DeserializeObject<ObservableCollection<Contact>>(file.ReadContacts());
+                if (items != null)
+                    contacts = items;
+            } 
+            catch { }
+
+            lv_Contacts.ItemsSource = contacts;  
         }
 
         private void Btn_AddContact_Click(object sender, RoutedEventArgs e)
@@ -47,6 +62,7 @@ namespace WpfApp
                 Address= tb_Address.Text
             });
 
+            file.SaveContact(JsonConvert.SerializeObject(contacts));
             ClearForm();
         }
 

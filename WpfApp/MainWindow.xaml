@@ -3,10 +3,54 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:models="clr-namespace:WpfApp.Models"
         xmlns:local="clr-namespace:WpfApp"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" /> 
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
+        <!--FORM-->
+        <Grid Grid.Column="0" Margin="0 0 20 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0">
+                <TextBlock Text="Förnamn"/>
+                <TextBox x:Name="tb_FirstName" Padding="2" Margin="0 0 0 10" />
+
+                <TextBlock Text="Efternamn"/>
+                <TextBox x:Name="tb_LastName" Padding="2" Margin="0 0 0 10" /> 
+
+                <TextBlock Text="Email"/>
+                <TextBox x:Name="tb_Email" Padding="2" Margin="0 0 0 10" />
+
+                <TextBlock Text="Telefonnummer"/>
+                <TextBox x:Name="tb_Phone" Padding="2" Margin="0 0 0 10" />
+
+                <TextBlock Text="Adress"/>
+                <TextBox x:Name="tb_Address" Padding="0 0 0 20" Margin="0 0 0 10" />
+            </StackPanel>
+
+            <Button x:Name="btn_AddContact" Click="Btn_AddContact_Click" Grid.Row="1" VerticalAlignment="Bottom" Content="LÄGG TILL KONTAKT" Padding="4"/>
+
+        </Grid> 
+        
+        <!--CONTACTLIST-->
+        <ListView x:Name="lv_Contacts" Grid.Column="1" Margin="20 0 0 0">
+            <ListView.ItemTemplate>
+                <DataTemplate DataType="models:Contact">
+                    <StackPanel Margin="5 0 0 5">
+                        <TextBlock FontWeight="Bold" Text="{Binding DisplayName}" />
+                        <TextBlock Text="{Binding Email}" />
+                    </StackPanel> 
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
     </Grid>
 </Window>
