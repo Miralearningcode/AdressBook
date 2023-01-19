@@ -27,7 +27,7 @@ namespace WpfApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ObservableCollection<Contact> contacts = new ObservableCollection<Contact>();
+        private ObservableCollection<ContactModel> contacts = new ObservableCollection<ContactModel>();
         private readonly FileService file = new();
 
         public MainWindow()
@@ -42,7 +42,7 @@ namespace WpfApp
         {
             try
             {
-                var items = JsonConvert.DeserializeObject<ObservableCollection<Contact>>(file.ReadContacts());
+                var items = JsonConvert.DeserializeObject<ObservableCollection<ContactModel>>(file.ReadContacts());
                 if (items != null)
                     contacts = items;
             } 
@@ -53,7 +53,7 @@ namespace WpfApp
 
         private void Btn_AddContact_Click(object sender, RoutedEventArgs e)
         {
-            contacts.Add(new Contact
+            contacts.Add(new ContactModel
             {
                 FirstName = tb_FirstName.Text,
                 LastName = tb_LastName.Text,

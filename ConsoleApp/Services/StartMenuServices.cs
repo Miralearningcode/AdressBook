@@ -95,13 +95,31 @@ internal class StartMenuServices
         Console.Clear();
         Console.WriteLine("Visa en kontakt");
         Console.Write("Skriv in förnamnet på den kontakt du vill visa:");
+        var searchName = Console.ReadLine();
+        DisplayContact(searchName);
         Console.ReadKey();
     }
+
+    public void DisplayContact(string firstName)
+    { 
+        var contact = contacts.FirstOrDefault(c => c.FirstName == firstName);
+        if (contact == null)
+        {
+            Console.WriteLine("Could not find a contact with that name.");
+        }
+        else 
+        {
+            Console.WriteLine($"{contact.FirstName}");
+            Console.WriteLine($"{contact.LastName}");
+        }
+    }
+
+
     private void SelectFour() //Radera en specifik kontakt
     {
         Console.Clear();
         Console.WriteLine("Ta bort en kontakt i adressboken");
-        Console.Write("Skriv in förnamnet på den person du vill ta bort:");
+        Console.Write("Skriv in förnamnet följt av efternamnet på den person du vill ta bort:");
         Console.ReadLine();
         Console.ReadKey();
     }

@@ -9,7 +9,7 @@ internal interface IContact
     string Address { get; set; }
 }
 
-internal class Contact : IContact
+internal class ContactModel : IContact
 {
     public string FirstName { get; set; } = null!;
     public string LastName { get; set; } = null!;
