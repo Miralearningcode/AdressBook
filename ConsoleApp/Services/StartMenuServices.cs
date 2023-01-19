@@ -60,7 +60,7 @@ internal class StartMenuServices
         var contact = new Contact();
 
         Console.Clear();
-        Console.WriteLine("Skapa en kontakt");
+        Console.WriteLine("SKAPA EN KONTAKT");
         Console.Write("Skriv in förnamn:");
         contact.FirstName = Console.ReadLine() ?? "";
         Console.Write("Skriv in efternamn:");
@@ -80,7 +80,7 @@ internal class StartMenuServices
     private void SelectTwo() //Visa alla kontakter
     {
         Console.Clear();
-        Console.WriteLine("Alla kontakter");
+        Console.WriteLine("ALLA KONTAKTER");
 
         foreach (var contact in contacts) //Since it is a list foreach loop is needed
         {
@@ -93,24 +93,27 @@ internal class StartMenuServices
     private void SelectThree() //Visa specifik kontakt
     {
         Console.Clear();
-        Console.WriteLine("Visa en kontakt");
-        Console.Write("Skriv in förnamnet på den kontakt du vill visa:");
+        Console.WriteLine("VISA EN KONTAKT");
+        Console.Write("Skriv in förnamnet på den kontakt du vill visa, börja med stor bokstav:");
         var searchName = Console.ReadLine();
         DisplayContact(searchName);
         Console.ReadKey();
     }
 
-    public void DisplayContact(string firstName)
+    public void DisplayContact(string? firstName)
     { 
         var contact = contacts.FirstOrDefault(c => c.FirstName == firstName);
         if (contact == null)
         {
-            Console.WriteLine("Could not find a contact with that name.");
+            Console.WriteLine("Kunde inte hitta en kontakt med det namnet.");
         }
         else 
         {
-            Console.WriteLine($"{contact.FirstName}");
-            Console.WriteLine($"{contact.LastName}");
+            Console.WriteLine($"Förnamn: {contact.FirstName}");
+            Console.WriteLine($"Efternamn: {contact.LastName}");
+            Console.WriteLine($"Email: {contact.Email}");
+            Console.WriteLine($"Telefonnummer: {contact.Phone}");
+            Console.WriteLine($"Adress: {contact.Address}");
         }
     }
 
@@ -118,8 +121,8 @@ internal class StartMenuServices
     private void SelectFour() //Radera en specifik kontakt
     {
         Console.Clear();
-        Console.WriteLine("Ta bort en kontakt i adressboken");
-        Console.Write("Skriv in förnamnet följt av efternamnet på den person du vill ta bort:");
+        Console.WriteLine("TA BORT EN KONTAKT");
+        Console.Write("Skriv in förnamnet följt av efternamnet på den person du vill ta bort, glöm inte att börja med stor bokstav:");
         Console.ReadLine();
         Console.ReadKey();
     }
