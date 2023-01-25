@@ -8,18 +8,18 @@ namespace ConsoleApp.Services
 {
     internal class FileService
     {
-        public string Path { get; set; } = null!; 
-        public void SaveContact(string content)  // Save a contact  public void SaveContact(string path, string content) 
+        public string FilePath { get; set; } = null!; 
+        public void SaveContact(string content)  
         {
-            using var sw = new StreamWriter (Path); //
+            using var sw = new StreamWriter (FilePath); 
             sw.WriteLine(content);
         }
 
-        public string ReadContacts()  //Show all contacts (string path), is a constructor  
+        public string ReadContacts()  
         {
             try
             {
-                using var sr = new StreamReader(Path);  
+                using var sr = new StreamReader(FilePath);  
                 return sr.ReadToEnd();
             }
             catch
@@ -35,7 +35,7 @@ namespace ConsoleApp.Services
 
         //}
 
-        //public void/string DeleteContact()   //Delete a contact
+        // public void Delete (string path)   //Delete a contact
         //{
 
         //}

@@ -8,7 +8,7 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
             var startmenu = new StartMenuServices();
-            startmenu.Path = @$"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\content.json";
+            startmenu.FilePath = @$"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\content.json";
 
       
 
