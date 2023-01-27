@@ -24,8 +24,8 @@ internal class StartMenuServices
         Console.WriteLine();
         Console.WriteLine("1.Skapa en kontakt");
         Console.WriteLine("2.Visa alla kontakter");
-        Console.WriteLine("3.Visa en specifik kontakt");
-        Console.WriteLine("4.Ta bort en specifik kontakt");
+        Console.WriteLine("3.Visa en kontakt");
+        Console.WriteLine("4.Ta bort en kontakt");
         Console.WriteLine();
         Console.Write("Välj ett av alternativen ovan:");
         var select = Console.ReadLine();
@@ -136,12 +136,12 @@ internal class StartMenuServices
         Console.WriteLine("TA BORT EN KONTAKT");
         Console.WriteLine();
         Console.Write("Skriv in förnamnet på den person du vill ta bort, glöm inte att börja med stor bokstav:");
-        var inputContact = Console.ReadLine() ?? null!; // ?? null!;
+        var inputContact = Console.ReadLine() ?? null!; 
         DisplayContact(inputContact);
         Console.WriteLine();
 
         var findContact = contacts.FirstOrDefault(c => c.FirstName == inputContact);
-        bool selected = false; //START
+        bool selected = false; 
         while (!selected)
         {
             Console.WriteLine("Är du säker på att du vill ta bort kontakten? Skriv in [j] för ja, skriv in [n] så kommer du tillbaka till huvudmenyn");
@@ -160,28 +160,6 @@ internal class StartMenuServices
             {
                 selected = true;
             }
-
-
-
-            // bool selected = false; //START
-            //while (!selected)
-            //{
-            //Console.WriteLine("Är du säker på att du vill ta bort kontakten? Skriv in [y] för ja, skriv in [n] så kommer du tillbaka till huvudmenyn");
-            //var key = Console.ReadLine();
-
-            //if (key == "y")
-            //{
-            //selected = true;
-            //contacts.Remove(inputContact);
-            //file.SaveContact(JsonConvert.SerializeObject(contacts));
-
-            //Console.WriteLine("Kontakten är nu raderad, tryck på valfri tangent för att komma tillbaka till huvudmenyn");
-            //Console.ReadKey();
-            //}
-            //else if (key == "n")
-            //{
-            // selected = true;
-            //}
         }
     }
 }
