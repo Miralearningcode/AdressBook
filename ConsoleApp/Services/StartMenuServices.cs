@@ -5,7 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace ConsoleApp.Services;
 
-public class StartMenuServices //public so it can be tested
+public class StartMenuServices //public so it can be used for tests
 {
     public List<Contact> contacts = new List<Contact>();  
     private FileService file = new FileService();
@@ -76,10 +76,14 @@ public class StartMenuServices //public so it can be tested
         contact.Email = Console.ReadLine() ?? "";
         Console.Write("Skriv in telefonnummer:");
         contact.Phone = Console.ReadLine() ?? "";
-        Console.Write("Skriv in adress:");
-        contact.Address = Console.ReadLine() ?? "";
+        Console.Write("Skriv in gatunamn samt gatunummer:");
+        contact.StreetName = Console.ReadLine() ?? "";
+        Console.Write("Skriv in postnummer:");
+        contact.PostalCode = Console.ReadLine() ?? "";
+        Console.Write("Skriv in ort:");
+        contact.County = Console.ReadLine() ?? "";
         Console.WriteLine();
-        Console.WriteLine("Kontakten är nu sparad, tryck på valfri tangent för att komma tillbaka till huvudmenyn");
+        Console.WriteLine("Kontakten är nu sparad, tryck på valfri tangent för att återgå till huvudmenyn");
         Console.ReadKey();
 
         contacts.Add(contact);
@@ -97,7 +101,7 @@ public class StartMenuServices //public so it can be tested
         }
 
         Console.WriteLine();
-        Console.WriteLine("Tryck på valfri tangent för att komma tillbaka till huvudmenyn");
+        Console.WriteLine("Tryck på valfri tangent för att återgå till huvudmenyn");
         Console.ReadKey();
     }
 
@@ -110,7 +114,7 @@ public class StartMenuServices //public so it can be tested
         var inputName = Console.ReadLine();
         DisplayContact(inputName);
         Console.WriteLine();
-        Console.WriteLine("Tryck på valfri tangent för att komma tillbaka till huvudmenyn");
+        Console.WriteLine("Tryck på valfri tangent för att återgå till huvudmenyn");
         Console.ReadKey();
     }
 
@@ -119,7 +123,7 @@ public class StartMenuServices //public so it can be tested
         var findContact = contacts.FirstOrDefault(c => c.FirstName == firstName);
         if (findContact == null)
         {
-            Console.WriteLine("Kunde inte hitta en kontakt med det namnet.");
+            Console.WriteLine("Kunde inte hitta en kontakt med det namnet, tryck på valfri tangent för att återgå till huvudmenyn.");
         }
         else
         {
@@ -127,7 +131,9 @@ public class StartMenuServices //public so it can be tested
             Console.WriteLine($"Efternamn: {findContact.LastName}");
             Console.WriteLine($"Email: {findContact.Email}");
             Console.WriteLine($"Telefonnummer: {findContact.Phone}");
-            Console.WriteLine($"Adress: {findContact.Address}");
+            Console.WriteLine($"Gata: {findContact.StreetName}");
+            Console.WriteLine($"Postnummer: {findContact.PostalCode}");
+            Console.WriteLine($"Ort: {findContact.County}");
         }
     }
 
@@ -142,9 +148,11 @@ public class StartMenuServices //public so it can be tested
         DisplayContact(inputContact);
         Console.WriteLine();
 
-        var findContact = contacts.FirstOrDefault(c => c.FirstName == inputContact);
+        var findContact = contacts.FirstOrDefault(c => c.FirstName == inputContact)!;
+        if (findContact == null) Console.ReadKey();
+
         bool selected = false; 
-        while (!selected)
+        while (!selected && findContact!=null)
         {
             Console.WriteLine("Är du säker på att du vill ta bort kontakten? Skriv in [j] för ja, skriv in [n] så kommer du tillbaka till huvudmenyn");
             var key = Console.ReadLine();

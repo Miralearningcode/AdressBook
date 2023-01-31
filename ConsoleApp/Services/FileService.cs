@@ -27,17 +27,5 @@ namespace ConsoleApp.Services
                 return null!;
             }
         }
-
-        
-
-        //public void/string SpecificContact (string path) //Show a specific contact
-        //{ 
-
-        //}
-
-        // public void Delete (string path)   //Delete a contact
-        //{
-
-        //}
     }
 }
