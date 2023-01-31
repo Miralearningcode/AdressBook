@@ -1,6 +1,6 @@
 ﻿namespace ConsoleApp.Models;
 
-internal class Contact
+public class Contact //public so it can be tested
 {
     public string FirstName { get; set; } = null!;
     public string LastName { get; set; } = null!;

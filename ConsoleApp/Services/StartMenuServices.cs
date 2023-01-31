@@ -5,13 +5,15 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace ConsoleApp.Services;
 
-internal class StartMenuServices
+public class StartMenuServices //public so it can be tested
 {
-    private List<Contact> contacts = new List<Contact>();  
+    public List<Contact> contacts = new List<Contact>();  
     private FileService file = new FileService();
 
 
     public string FilePath { get; set; } = null!;
+    public static List<Contact> ContactList { get; set; } = null!;
+
     public void StartMenu()
     {
         file.FilePath = @$"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\content.json"; 
