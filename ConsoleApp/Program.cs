@@ -15,7 +15,6 @@ namespace ConsoleApp
 
             while(true)
             {   
-                //console.clear?
                 startmenu.StartMenu();
             }
             
